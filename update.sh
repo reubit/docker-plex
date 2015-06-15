@@ -4,4 +4,6 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 source $DIR/docker.conf
 
-docker build -t $DOCKER_IMAGE $DIR
+$DIR/build.sh
+$DIR/remove.sh
+$DIR/start.sh | xargs docker logs -f

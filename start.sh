@@ -1,7 +1,11 @@
 #!/bin/bash
 
-docker run -d --name=plex --net=host \
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+source $DIR/docker.conf
+
+docker run -d --name=$DOCKER_NAME --net=host \
   -v /etc/localtime:/etc/localtime:ro \
-  -v /data/docker/volumes/plex-config:/config \
-  -v /mnt/storage/media:/media \
-  reubit/plex
+  -v $PLEX_CONFIG:/config \
+  -v $PLEX_MEDIA:/media \
+  $DOCKER_IMAGE
