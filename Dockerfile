@@ -3,7 +3,7 @@ MAINTAINER Reuben Mannell "reuben@reubit.com"
 
 RUN apt-get update && apt-get install -yq wget curl
 
-RUN curl https://plex.tv/downloads -s | grep -i Ubuntu64 | grep -oP '[^"]+_amd64.deb' | xargs wget -O plexmediaserver.deb && dpkg -i plexmediaserver.deb
+RUN curl 'https://plex.tv/api/downloads/1.json' -s | grep -oP 'Ubuntu 64.*?\K[^"]+_amd64.deb' | xargs wget -O plexmediaserver.deb && dpkg -i plexmediaserver.deb
 RUN apt-get install -fyq
 RUN rm -f plexmediaserver.deb
 
